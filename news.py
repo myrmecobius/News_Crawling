@@ -3,6 +3,7 @@ import os
 import re
 import json
 import winsound
+import sys
 
 #%%
 def get_site(url):
@@ -11,6 +12,8 @@ def get_site(url):
 
 #%%
 def crawl(url, i = 10**9, path = os.getcwd(), return_ans = False): #scrapes some number i of urls from supported news pages
+    if 'crawling' not in sys.path: #if crawling folder is not accessible
+        sys.path.append('crawling') #add crawling folder to current path
     siteDict = {'abcnews.go.com':('abc','ABC_crawl'), #dictionary of child functions and file paths
         'www.breitbart.com':('bbt','Breitbart_crawl'),
         'www.cbsnews.com':('cbs','CBS_crawl'),
@@ -33,6 +36,8 @@ def crawl(url, i = 10**9, path = os.getcwd(), return_ans = False): #scrapes some
 
 #%%
 def scrape(filename, path = os.getcwd(), start = 0, return_ans = False): #scrapes urls for article given a json file
+    if 'scraping' not in sys.path: #if scraping folder is not accessible
+        sys.path.append('scraping') #add scraping folder to current path
     with open(filename) as file:
         urls = json.load(file)
     article_text = []
